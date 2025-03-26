@@ -6,7 +6,7 @@ app = Flask(__name__)
 def receive_bird_data():
     data = request.get_json()
 
-    # Validación básica
+    # Validación simple
     if not data or not all(k in data for k in ("nombre", "apellido", "email")):
         return jsonify({"error": "Faltan campos requeridos"}), 400
 
@@ -14,15 +14,14 @@ def receive_bird_data():
     apellido = data["apellido"]
     email = data["email"]
 
-    print(f"📥 Recibido: {nombre} {apellido} - {email}")
+    print(f"🟦 Recibido: {nombre} {apellido} - {email}")
 
-    # Acá podrías guardar en DB, Google Sheet o enviar a otro lado
     return jsonify({
         "status": "ok",
         "mensaje": f"¡Gracias, {nombre}! Tus datos fueron recibidos correctamente."
     }), 200
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
 
 
